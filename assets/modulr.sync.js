@@ -53,7 +53,7 @@
         // `main` isn't defined until we actually require the program's
         // entry point.
         var r = makeRequire(id, main || mod);
-        fn.call(exports, r, mod.exports, mod);
+        fn.call(mod.exports, r, mod.exports, mod);
         if (__PERF__) {
           _p.right = _pos++;
           _p.end = Date.now();
@@ -68,7 +68,7 @@
 
   function resolveIdentifier(identifier, dir) {
     var parts, part, path;
-    
+
     if (!RELATIVE_IDENTIFIER_PATTERN.test(identifier)) {
       return identifier;
     }
@@ -95,12 +95,12 @@
     }
     return path.join('/');
   }
-  
+
   function define(id, factory) {
     if (__PERF__) { _perf.modules[id] = { count: 0 }; }
     _factories[PREFIX + id] = factory;
   }
-  
+
   exports.define = define;
   exports.require = makeRequire('');
   exports.modulr = modulr;
